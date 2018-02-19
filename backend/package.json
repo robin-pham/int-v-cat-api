@@ -1,0 +1,32 @@
+{
+  "name": "catapi",
+  "version": "1.0.0",
+  "description": "catapi",
+  "author": "Robin Pham",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js",
+    "lint": "eslint src",
+    "test": "NODE_ENV=test mocha -r @std/esm src/**/**.test.js"
+  },
+  "dependencies": {
+    "@koa/cors": "2",
+    "@std/esm": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^4.0.0",
+    "gm": "^1.23.1",
+    "koa": "^2.3.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-jwt": "^3.3.0",
+    "koa-router": "^7.3.0",
+    "nodemon": "^1.12.1",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "https://github.com/chaijs/chai-http#832f6c2d9b2252f57db7c5173c421aa5c9c45579",
+    "eslint": "^4.9.0",
+    "mocha": "^4.1.0"
+  },
+  "@std/esm": "js"
+}

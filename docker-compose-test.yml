@@ -1,0 +1,13 @@
+version: '3'
+services:
+  test-api:
+    image: node:8.7
+    working_dir: /api
+    command: ["./init-backend.sh"]
+    ports:
+      - 8081:8081
+    environment:
+      - API_PORT=8081
+      - JWT_SECRET=testsecret
+    volumes: 
+      - .:/api
