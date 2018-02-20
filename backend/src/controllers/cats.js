@@ -5,7 +5,7 @@ import gm from 'gm';
 
 const CAT_FOLDER = path.resolve('src/cats/');
 const PUBLIC_CAT_FOLDER = path.resolve('public');
-const OUTSIDE_URL = 'http://www.robin-pham.com/';
+const OUTSIDE_URL = 'robin-pham.com/';
 
 const catImages = fs.readdirSync(CAT_FOLDER).map(file => {
   return path.join(CAT_FOLDER, file);
