@@ -5,6 +5,7 @@ import gm from 'gm';
 
 const CAT_FOLDER = path.resolve('src/cats/');
 const PUBLIC_CAT_FOLDER = path.resolve('public');
+const OUTSIDE_URL = 'http://www.robin-pham.com/';
 
 const catImages = fs.readdirSync(CAT_FOLDER).map(file => {
   return path.join(CAT_FOLDER, file);
@@ -28,7 +29,7 @@ async function getCatsImgurl(ctx) {
   const newImage = alterImage(imgPath, searchText);
 
   ctx.status = 200;
-  ctx.body = newImage;
+  ctx.body = `${OUTSIDE_URL}${newImage}`;
 }
 
 function alterImage(imgPath, searchText) {
@@ -36,7 +37,7 @@ function alterImage(imgPath, searchText) {
   gm(imgPath)
     .fill('#000000')
     .drawText(10, 20, searchText)
-    .fontSize('20px')
+    .fontSize('25px')
     .write(newFilename, err => {
       if (err) {
         winston.info('Error occurred:', err);
@@ -44,7 +45,7 @@ function alterImage(imgPath, searchText) {
       }
       winston.info('Successfully created image', newFilename);
     });
-  return newFilename;
+  return `${searchText}.jpg`;
 }
 
 export default {
