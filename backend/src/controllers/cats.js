@@ -26,26 +26,30 @@ async function getCatsImgurl(ctx) {
     ctx.body = path.resolve('public', `${searchText}.jpg`);
     return;
   }
-  const newImage = alterImage(imgPath, searchText);
+  const newImage = await alterImage(imgPath, searchText);
 
   ctx.status = 200;
   ctx.body = `${OUTSIDE_URL}${newImage}`;
 }
 
-function alterImage(imgPath, searchText) {
-  const newFilename = path.resolve('public', `${searchText}.jpg`);
-  gm(imgPath)
-    .fill('#000000')
-    .drawText(10, 20, searchText)
-    .fontSize('25px')
-    .write(newFilename, err => {
-      if (err) {
-        winston.info('Error occurred:', err);
-        return;
-      }
-      winston.info('Successfully created image', newFilename);
-    });
-  return `${searchText}.jpg`;
+async function alterImage(imgPath, searchText) {
+  const returnedFilename = `${searchText}.jpg`;
+  const newFilename = path.resolve('public', returnedFilename);
+  return new Promise((resolve, reject) => {
+    gm(imgPath)
+      .fill('#000000')
+      .drawText(10, 20, searchText)
+      .fontSize('25px')
+      .write(newFilename, err => {
+        if (err) {
+          winston.info('Error occurred:', err);
+          reject(err);
+          return;
+        }
+        resolve(returnedFilename);
+        winston.info('Successfully created image', newFilename);
+      });
+  });
 }
 
 export default {
